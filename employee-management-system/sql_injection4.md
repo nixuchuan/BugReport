@@ -1,6 +1,6 @@
 ### Vulnerability file address
 
-`Admin/login.php` from line 8,The `$password` parameter is controllable,, and the `$password` is not protected from sql injection, line 10 `$sql = "SELECT * FROM users WHERE username='".$username."' and password = '".$password."'";` ,line 11 `$result = mysqli_query($conn,$sql);`,line 11 performs a SQL query, causing SQL injection
+`Admin/login.php` from line 8,The `$password` parameter is controllable and the `$password` is not protected from sql injection, line 10 `$sql = "SELECT * FROM users WHERE username='".$username."' and password = '".$password."'";` ,line 11 `$result = mysqli_query($conn,$sql);`,line 11 performs a SQL query, causing SQL injection
 
 ```php
 <?php
