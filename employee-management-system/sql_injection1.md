@@ -1,6 +1,6 @@
 ### Vulnerability file address
 
-`Admin/edit_profile.php` from line 12,The `$phone` parameter is controllable,, and the `$phone` is not protected from sql injection, line 14 `$sql = " update users set fullname='$fullname',phone='$phone' where username='$username'";` ,line 15 `mysqli_query($conn, $sql)`Line 15 performs a SQL query, causing SQL injection
+`Admin/edit_profile.php` from line 12,The `$phone` parameter is controllable and the `$phone` is not protected from sql injection, line 14 `$sql = " update users set fullname='$fullname',phone='$phone' where username='$username'";` ,line 15 `mysqli_query($conn, $sql)`Line 15 performs a SQL query, causing SQL injection
 
 ```php
 <?php
