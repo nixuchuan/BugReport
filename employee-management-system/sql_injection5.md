@@ -1,6 +1,6 @@
 ### Vulnerability file address
 
-`Account/Login.php` from line 14,The `$password` parameter is controllable,, and the `$password` is not protected from sql injection, line 18 ` $sql = "SELECT * FROM tblemployee WHERE email='" .$email. "' and password = '".$password."'  and status = '".$status."'";` ,line 19 `$result = mysqli_query($conn,$sql);`,line 19 performs a SQL query, causing SQL injection
+`Account/Login.php` from line 14,The `$password` parameter is controllable and the `$password` is not protected from sql injection, line 18 ` $sql = "SELECT * FROM tblemployee WHERE email='" .$email. "' and password = '".$password."'  and status = '".$status."'";` ,line 19 `$result = mysqli_query($conn,$sql);`,line 19 performs a SQL query, causing SQL injection
 
 ```php
 <?php
