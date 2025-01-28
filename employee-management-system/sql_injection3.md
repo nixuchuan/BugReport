@@ -1,6 +1,6 @@
 ### Vulnerability file address
 
-`Employee/delete_leave.php` from line 9,The `$id` parameter is controllable,, and the `$id` is not protected from sql injection, line 10 `$sql = "DELETE From `tblleave` where leaveID ='$id'";` ,line 11 `$result = mysqli_query($conn, $sql);`Line 15 performs a SQL query, causing SQL injection
+`Employee/delete_leave.php` from line 9,The `$id` parameter is controllable and the `$id` is not protected from sql injection, line 10 `$sql = "DELETE From `tblleave` where leaveID ='$id'";` ,line 11 `$result = mysqli_query($conn, $sql);`Line 15 performs a SQL query, causing SQL injection
 
 ```php
 <?php
