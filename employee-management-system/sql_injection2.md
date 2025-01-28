@@ -1,6 +1,6 @@
 ### Vulnerability file address
 
-`Employee/edit-profile.php` from line 8,The `$_POST['txtfullname']` parameter is controllable,, and the `$_POST['txtfullname']` is not protected from sql injection, line 8`$sql = " update tblemployee set fullname='".$_POST['txtfullname']."',sex='".$_POST['cmdsex']."',dob='".$_POST['txtdob']."',phone='".$_POST['txtphone']."',address='".$_POST['txtaddress']."',qualification='".$_POST['txtqualification']."',dept='".$_POST['cmddept']."',employee_type='".$_POST['cmdemployeetype']."',date_appointment='".$_POST['txtappointment']."',basic_salary='".$_POST['txtbasic_salary']."',gross_pay='".$_POST['txtgross_pay']."' where email='$email'";` ,line 9`mysqli_query($conn, $sql)`Line 15 performs a SQL query, causing SQL injection
+`Employee/edit-profile.php` from line 8,The `$_POST['txtfullname']` parameter is controllable and the `$_POST['txtfullname']` is not protected from sql injection, line 8`$sql = " update tblemployee set fullname='".$_POST['txtfullname']."',sex='".$_POST['cmdsex']."',dob='".$_POST['txtdob']."',phone='".$_POST['txtphone']."',address='".$_POST['txtaddress']."',qualification='".$_POST['txtqualification']."',dept='".$_POST['cmddept']."',employee_type='".$_POST['cmdemployeetype']."',date_appointment='".$_POST['txtappointment']."',basic_salary='".$_POST['txtbasic_salary']."',gross_pay='".$_POST['txtgross_pay']."' where email='$email'";` ,line 9`mysqli_query($conn, $sql)`Line 15 performs a SQL query, causing SQL injection
 
 ```php
 <?php
